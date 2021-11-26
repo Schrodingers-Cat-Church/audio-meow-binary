@@ -13,9 +13,8 @@ namespace AudioMeowBinary
     /// 
     public partial class MainWindow : Window
     {
-        string textboxText;
-        string meowBinaryText;
-
+        string audFileName;
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -23,10 +22,11 @@ namespace AudioMeowBinary
 
         private void ConvertText(object sender, RoutedEventArgs e)
         {
-            textboxText = EnglishText.Text;
+            string textboxText = EnglishText.Text;
+            string meowBinaryText = "";
             byte[] byteArray = Encoding.ASCII.GetBytes(textboxText);
 
-            meowBinaryText = "";
+            
             for (int i = 0; i < byteArray.Length; i++)
             {
                 for (int j = 0; j < 8; j++)
@@ -36,14 +36,15 @@ namespace AudioMeowBinary
                 }
             }
             char[] charArray = meowBinaryText.ToCharArray();
-            Concatenate("./out.wav", charArray);
+            audFileName = "./meow_" + DateTime.Now.ToString("ddHHmmss") + ".wav";
+            Concatenate(audFileName, charArray);
         }
 
         private void Concatenate(string outputFile, IEnumerable<char> sourceFiles)
         {
-            if (File.Exists(@"./out.wav"))
+            if (File.Exists(outputFile))
             {
-                File.Delete(@"./out.wav");
+                File.Delete(outputFile);
             }
 
             byte[] buffer = new byte[1024];
@@ -78,13 +79,13 @@ namespace AudioMeowBinary
 
         private void PlayAudio(object sender, RoutedEventArgs e)
         {
-            System.Media.SoundPlayer player = new System.Media.SoundPlayer("./out.wav");
+            System.Media.SoundPlayer player = new System.Media.SoundPlayer(audFileName);
             player.Play();
         }
 
         private void ViewAudioFile(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Process.Start("explorer.exe", string.Format("/select,\"{0}\"", Path.GetFullPath("./out.wav")));
+            System.Diagnostics.Process.Start("explorer.exe", string.Format("/select,\"{0}\"", Path.GetFullPath(audFileName)));
         }
     }
 }
