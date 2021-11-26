@@ -18,26 +18,30 @@ namespace AudioMeowBinary
         public MainWindow()
         {
             InitializeComponent();
+            EnableButtons(false);
         }
 
         private void ConvertText(object sender, RoutedEventArgs e)
         {
+            EnableButtons(false);
             string textboxText = EnglishText.Text;
             string meowBinaryText = "";
             byte[] byteArray = Encoding.ASCII.GetBytes(textboxText);
 
-            
-            for (int i = 0; i < byteArray.Length; i++)
+            if (textboxText != "")
             {
-                for (int j = 0; j < 8; j++)
+                for (int i = 0; i < byteArray.Length; i++)
                 {
-                    meowBinaryText += (byteArray[i] & 0x80) > 0 ? "1" : "0";
-                    byteArray[i] <<= 1;
+                    for (int j = 0; j < 8; j++)
+                    {
+                        meowBinaryText += (byteArray[i] & 0x80) > 0 ? "1" : "0";
+                        byteArray[i] <<= 1;
+                    }
                 }
+                char[] charArray = meowBinaryText.ToCharArray();
+                audFileName = "./meow_" + DateTime.Now.ToString("ddHHmmss") + ".wav";
+                Concatenate(audFileName, charArray);
             }
-            char[] charArray = meowBinaryText.ToCharArray();
-            audFileName = "./meow_" + DateTime.Now.ToString("ddHHmmss") + ".wav";
-            Concatenate(audFileName, charArray);
         }
 
         private void Concatenate(string outputFile, IEnumerable<char> sourceFiles)
@@ -74,6 +78,7 @@ namespace AudioMeowBinary
                 {
                     waveFileWriter.Dispose();
                 }
+                EnableButtons(true);
             }
         }
 
@@ -86,6 +91,12 @@ namespace AudioMeowBinary
         private void ViewAudioFile(object sender, RoutedEventArgs e)
         {
             System.Diagnostics.Process.Start("explorer.exe", string.Format("/select,\"{0}\"", Path.GetFullPath(audFileName)));
+        }
+
+        private void EnableButtons(bool val)
+        {
+            PlayBtn.IsEnabled = val;
+            ViewFileBtn.IsEnabled = val;
         }
     }
 }
