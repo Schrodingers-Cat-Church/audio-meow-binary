@@ -9,6 +9,7 @@
     <Product>Audio Meow Binary</Product>
     <Description>Convert English to and audio Meow Binary file</Description>
     <RepositoryUrl>https://github.com/Schrodingers-Cat-Church/audio-meow-binary</RepositoryUrl>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
