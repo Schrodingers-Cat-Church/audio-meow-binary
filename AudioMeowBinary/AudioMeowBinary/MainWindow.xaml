@@ -5,12 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AudioMeowBinary"
         mc:Ignorable="d"
-        Title="Audio Meow Binary" Height="420" Width="420">
+        Title="Audio Meow Binary" Height="420" Width="420" ResizeMode="CanMinimize">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="11*"/>
-            <ColumnDefinition Width="149*"/>
-        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
 
+        <Label Content="Text to Convert" Margin="-10,21,10,50" HorizontalContentAlignment="Center"/>
+        <TextBox Name="EnglishText" Margin="10,51,0,60" Grid.RowSpan="2"/>
+        <Button Grid.Row="1" Content="Convert" Margin="46,71,46,71" Grid.RowSpan="2"/>
+        <Button Grid.Row="2" Content="Play" Margin="30,81,215,55" Grid.RowSpan="2"/>
+        <Button Grid.Row="3" Content="View Audio File" Margin="210,18,10,17"/>
     </Grid>
 </Window>
