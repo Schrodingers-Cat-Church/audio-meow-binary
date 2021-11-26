@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AudioMeowBinary"
         mc:Ignorable="d"
-        Title="Audio Meow Binary" Height="420" Width="420" ResizeMode="CanMinimize">
+        Title="Audio Meow Binary" Height="420" Width="420" ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
