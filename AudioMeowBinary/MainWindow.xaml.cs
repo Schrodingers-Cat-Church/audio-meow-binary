@@ -44,6 +44,8 @@ namespace AudioMeowBinary
                 }
             }
             Console.WriteLine(meowBinaryText);
+
+
             EnglishText.Text = meowBinaryText;
         }
     }
