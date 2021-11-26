@@ -35,7 +35,6 @@ namespace AudioMeowBinary
                     byteArray[i] <<= 1;
                 }
             }
-            Console.WriteLine(meowBinaryText);
             char[] charArray = meowBinaryText.ToCharArray();
             Concatenate("./out.wav", charArray);
         }
