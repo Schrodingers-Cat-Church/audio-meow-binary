@@ -37,15 +37,10 @@ namespace AudioMeowBinary
             }
             Console.WriteLine(meowBinaryText);
             char[] charArray = meowBinaryText.ToCharArray();
-            string[] strArray = new string[charArray.Length];
-            for (int i = 0; i < charArray.Length; i++)
-            {
-                strArray[i] = charArray[i] == '0' ? "meow_lower.wav" : "meow_upper.wav";
-            }
-            Concatenate("./out.wav", strArray);
+            Concatenate("./out.wav", charArray);
         }
 
-        private void Concatenate(string outputFile, IEnumerable<string> sourceFiles)
+        private void Concatenate(string outputFile, IEnumerable<char> sourceFiles)
         {
             if (File.Exists(@"./out.wav"))
             {
@@ -57,9 +52,10 @@ namespace AudioMeowBinary
 
             try
             {
-                foreach (string sourceFile in sourceFiles)
+                foreach (char sourceFile in sourceFiles)
                 {
-                    using WaveFileReader reader = new WaveFileReader(sourceFile);
+                    UnmanagedMemoryStream audRes = sourceFile == '0' ? Properties.Resources.meow_lower : Properties.Resources.meow_upper;
+                    using WaveFileReader reader = new WaveFileReader(audRes);
                     if (waveFileWriter == null)
                     {
                         waveFileWriter = new WaveFileWriter(outputFile, reader.WaveFormat);
