@@ -4,6 +4,11 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
+    <Authors>Schodinger's Cat Church</Authors>
+    <Version>0.4.2</Version>
+    <Product>Audio Meow Binary</Product>
+    <Description>Convert English to and audio Meow Binary file</Description>
+    <RepositoryUrl>https://github.com/Schrodingers-Cat-Church/audio-meow-binary</RepositoryUrl>
   </PropertyGroup>
 
 </Project>
