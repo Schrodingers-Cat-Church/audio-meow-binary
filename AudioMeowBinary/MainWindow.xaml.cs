@@ -76,5 +76,16 @@ namespace AudioMeowBinary
                 }
             }
         }
+
+        private void PlayAudio(object sender, RoutedEventArgs e)
+        {
+            System.Media.SoundPlayer player = new System.Media.SoundPlayer("./out.wav");
+            player.Play();
+        }
+
+        private void ViewAudioFile(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("explorer.exe", string.Format("/select,\"{0}\"", Path.GetFullPath("./out.wav")));
+        }
     }
 }
