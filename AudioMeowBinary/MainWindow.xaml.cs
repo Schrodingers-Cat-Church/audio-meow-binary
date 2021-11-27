@@ -13,7 +13,7 @@ namespace AudioMeowBinary
     /// 
     public partial class MainWindow : Window
     {
-        string audFileName;
+        private string audFileName;
         
         public MainWindow()
         {
@@ -42,6 +42,17 @@ namespace AudioMeowBinary
                 audFileName = "./meow_" + DateTime.Now.ToString("ddHHmmss") + ".wav";
                 Concatenate(audFileName, charArray);
             }
+        }
+
+        private void PlayAudio(object sender, RoutedEventArgs e)
+        {
+            System.Media.SoundPlayer player = new System.Media.SoundPlayer(audFileName);
+            player.Play();
+        }
+
+        private void ViewAudioFile(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("explorer.exe", string.Format("/select,\"{0}\"", Path.GetFullPath(audFileName)));
         }
 
         private void Concatenate(string outputFile, IEnumerable<char> sourceFiles)
@@ -82,21 +93,9 @@ namespace AudioMeowBinary
             }
         }
 
-        private void PlayAudio(object sender, RoutedEventArgs e)
-        {
-            System.Media.SoundPlayer player = new System.Media.SoundPlayer(audFileName);
-            player.Play();
-        }
-
-        private void ViewAudioFile(object sender, RoutedEventArgs e)
-        {
-            System.Diagnostics.Process.Start("explorer.exe", string.Format("/select,\"{0}\"", Path.GetFullPath(audFileName)));
-        }
-
         private void EnableButtons(bool val)
         {
-            PlayBtn.IsEnabled = val;
-            ViewFileBtn.IsEnabled = val;
+            PlayBtn.IsEnabled = ViewFileBtn.IsEnabled = val;
         }
     }
 }
